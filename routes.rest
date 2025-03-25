@@ -1,0 +1,39 @@
+//LOCALHOST
+
+### HTTP Get all employees
+GET http://localhost:3000/employees
+
+
+### HTTP Get employee by ID
+GET http://localhost:3000/employees/67e193e70bde8cb3df98d268
+
+### HTTP Create employee
+POST http://localhost:3000/employees HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Carl Diaz",
+    "age":{"$numberInt":"38"},
+    "gender":"male",
+    "designation":"Software Developer",
+    "department":"IT",
+    "salary":{"$numberInt":"85000"}
+}
+
+
+### HTTP Update employee
+PUT http://localhost:3000/contacts/67d659731c72062580e700e0 HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Carl Diaz JR",
+    "age":{"$numberInt":"38"},
+    "gender":"male",
+    "designation":"Software Developer",
+    "department":"IT",
+    "salary":{"$numberInt":"90000"}
+}
+
+
+### HTTP Delete employee
+DELETE http://localhost:3000/contacts/67d659731c72062580e700e0
