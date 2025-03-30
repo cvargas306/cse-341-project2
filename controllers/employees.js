@@ -12,6 +12,9 @@ const getAll = async (req, res) => {
 
 const getSingle = async (req, res) => {
     //#swagger.tags=['employees']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid employee id to see one.');
+    }
     const employeeId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection('employees').find({ _id: employeeId });
     result.toArray().then((employees) => {
@@ -39,6 +42,9 @@ const createEmployee = async (req, res) => {
 
 const updateEmployee = async (req, res) => {
     //#swagger.tags=['employees']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid employee id to update one.');
+    }
     const employeeId = new ObjectId(req.params.id);
     const employee = {
         firstName: req.body.firstName,
@@ -57,6 +63,9 @@ const updateEmployee = async (req, res) => {
 
 const deleteEmployee = async (req, res) => {
     //#swagger.tags=['employees']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid employee id to delete one.');
+    }
     const employeeId = new ObjectId(req.params.id);
     const response = await mongodb.getDatabase().db().collection('employees').deleteOne({ _id: employeeId });
     if (response.deletedCount > 0) {
