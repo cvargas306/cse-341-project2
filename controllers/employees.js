@@ -57,7 +57,7 @@ const createEmployee = async (req, res) => {
 const updateEmployee = async (req, res) => {
     //#swagger.tags=['employees']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid employee id to update one.');
+        return res.status(400).json('Must use a valid employee id to update one.');
     }
     const employeeId = new ObjectId(req.params.id);
     const employee = {
