@@ -48,25 +48,48 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
+                  "type": "string",
                   "example": "any"
                 },
-                "lastName": {
+                "age": {
+                  "type": "integer",
                   "example": "any"
                 },
-                "email": {
+                "gender": {
+                  "type": "string",
                   "example": "any"
                 },
-                "favoriteColor": {
+                "designation": {
+                  "type": "string",
                   "example": "any"
                 },
-                "birthday": {
+                "department": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "salary": {
+                  "type": "integer",
+                  "example": "any"
+                },
+                "seniority": {
+                  "type": "string",
                   "example": "any"
                 }
-              }
+              },
+              "required": [
+                "name",
+                "age",
+                "gender",
+                "designation",
+                "department",
+                "salary",
+                "seniority"
+              ]
             }
           }
         ],
@@ -124,22 +147,36 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
+                  "type": "string",
                   "example": "any"
                 },
-                "lastName": {
+                "age": {
+                  "type": "integer",
                   "example": "any"
                 },
-                "email": {
+                "gender": {
+                  "type": "string",
                   "example": "any"
                 },
-                "favoriteColor": {
+                "designation": {
+                  "type": "string",
                   "example": "any"
                 },
-                "birthday": {
+                "department": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "salary": {
+                  "type": "integer",
+                  "example": "any"
+                },
+                "seniority": {
+                  "type": "string",
                   "example": "any"
                 }
               }

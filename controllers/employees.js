@@ -3,40 +3,54 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
     //#swagger.tags=['employees']
-    const result = await mongodb.getDatabase().db().collection('employees').find();
-    result.toArray().then((employees) => {
+    try {
+        const result = await mongodb.getDatabase().db().collection('employees').find();
+        const employees = await result.toArray();
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(employees);
-    });
+    } catch (error) {
+        res.status(500).json({ error: error.message || 'An error occurred while fetching employees.' });
+    }
 };
 
 const getSingle = async (req, res) => {
     //#swagger.tags=['employees']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid employee id to see one.');
+        res.status(400).json('Must use a valid employee id to find one.');
     }
-    const employeeId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('employees').find({ _id: employeeId });
-    result.toArray().then((employees) => {
+    try {
+        const employeeId = new ObjectId(req.params.id);
+        const result = await mongodb.getDatabase().db().collection('employees').findOne({ _id: employeeId });
+        if (!result) {
+            return res.status(404).json({ error: 'Employee not found' });
+        }
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(employees[0]);
-    });
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message || 'An error occurred while fetching the employee.' });
+    }
 };
 
 const createEmployee = async (req, res) => {
     //#swagger.tags=['employees']
     const employee = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: req.body.birthday
+        name: req.body.name,
+        age: parseInt(req.body.age, 10),
+        gender: req.body.gender,
+        designation: req.body.designation,
+        department: req.body.department,
+        salary: parseInt(req.body.salary, 10),
+        seniority: req.body.seniority
     };
-    const response = await mongodb.getDatabase().db().collection('employees').insertOne(employee);
-    if (response.acknowledged) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error ocurred while adding employee');
+    try {
+        const response = await mongodb.getDatabase().db().collection('employees').insertOne(employee);
+        if (response.acknowledged) {
+            res.status(201).json({ message: 'Employee created successfully', employeeId: response.insertedId });
+        } else {
+            res.status(500).json({ error: 'An error occurred while adding the employee' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message || 'An error occurred while adding the employee.' });
     }
 };
 
@@ -47,17 +61,23 @@ const updateEmployee = async (req, res) => {
     }
     const employeeId = new ObjectId(req.params.id);
     const employee = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: req.body.birthday
+        name: req.body.name,
+        age: parseInt(req.body.age, 10),
+        gender: req.body.gender,
+        designation: req.body.designation,
+        department: req.body.department,
+        salary: parseInt(req.body.salary, 10),
+        seniority: req.body.seniority
     };
-    const response = await mongodb.getDatabase().db().collection('employees').replaceOne({ _id: employeeId }, employee);
-    if (response.modifiedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error ocurred while updating employee');
+    try {
+        const response = await mongodb.getDatabase().db().collection('employees').replaceOne({ _id: employeeId }, employee);
+        if (response.modifiedCount > 0) {
+            res.status(200).json({ message: 'Employee updated successfully' });
+        } else {
+            res.status(404).json({ error: 'Employee not found or no changes made.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message || 'An error occurred while updating the employee.' });
     }
 };
 
@@ -66,12 +86,16 @@ const deleteEmployee = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
         res.status(400).json('Must use a valid employee id to delete one.');
     }
-    const employeeId = new ObjectId(req.params.id);
-    const response = await mongodb.getDatabase().db().collection('employees').deleteOne({ _id: employeeId });
-    if (response.deletedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error ocurred while deleting employee');
+    try {
+        const employeeId = new ObjectId(req.params.id);
+        const response = await mongodb.getDatabase().db().collection('employees').deleteOne({ _id: employeeId });
+        if (response.deletedCount > 0) {
+            res.status(200).json({ message: 'Employee deleted successfully' });
+        } else {
+            res.status(404).json({ error: 'Employee not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message || 'An error occurred while deleting the employee.' });
     }
 };
 
