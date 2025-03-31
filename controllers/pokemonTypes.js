@@ -56,7 +56,7 @@ const createPokemonType = async (req, res) => {
 const updatePokemonType = async (req, res) => {
     //#swagger.tags=['pokemon_types']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid pokemon id to update one.');
+        return res.status(400).json('Must use a valid pokemon id to update one.');
     }
     const pokemonId = new ObjectId(req.params.id);
     const pokemonType = {
@@ -82,7 +82,7 @@ const updatePokemonType = async (req, res) => {
 const deletePokemonType = async (req, res) => {
     //#swagger.tags=['pokemon_types']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid pokemon id to delete one.');
+        return res.status(400).json('Must use a valid pokemon id to delete one.');
     }
     try {
         const pokemonId = new ObjectId(req.params.id);

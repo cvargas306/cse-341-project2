@@ -16,7 +16,7 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
     //#swagger.tags=['employees']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid employee id to find one.');
+        return res.status(400).json('Must use a valid employee id to find one.');
     }
     try {
         const employeeId = new ObjectId(req.params.id);
@@ -25,9 +25,9 @@ const getSingle = async (req, res) => {
             return res.status(404).json({ error: 'Employee not found' });
         }
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result);
+        return res.status(200).json(result);
     } catch (error) {
-        res.status(500).json({ error: error.message || 'An error occurred while fetching the employee.' });
+        return res.status(500).json({ error: error.message || 'An error occurred while fetching the employee.' });
     }
 };
 
