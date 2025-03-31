@@ -10,7 +10,7 @@ router.get('/:id', pokemonTypesController.getSingle);
 
 router.post('/', validation.savePokemonType, pokemonTypesController.createPokemonType);
 
-router.put('/:id', validation.savePokemon, pokemonTypesController.updatePokemonType);
+router.put('/:id', validation.savePokemonType, pokemonTypesController.updatePokemonType);
 
 router.delete('/:id', pokemonTypesController.deletePokemonType);
 

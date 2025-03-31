@@ -229,7 +229,7 @@
         "tags": [
           "pokemon_types"
         ],
-        "description": "Get all Pokemon types",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -240,7 +240,7 @@
         "tags": [
           "pokemon_types"
         ],
-        "description": "Create a new Pokemon type",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -304,148 +304,157 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Pokemon type created successfully"
           },
-          "412": {
-            "description": "Precondition Failed"
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pokemon_types/{id}": {
+      "get": {
+        "tags": [
+          "pokemon_types"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "pokemon_types"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "english": {
+                  "type": "string",
+                  "example": "Fire"
+                },
+                "chinese": {
+                  "type": "string",
+                  "example": "火"
+                },
+                "japanese": {
+                  "type": "string",
+                  "example": "ファイア"
+                },
+                "effective": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "Grass",
+                    "Bug",
+                    "Ice"
+                  ]
+                },
+                "ineffective": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "Water",
+                    "Rock"
+                  ]
+                },
+                "no_effect": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "None"
+                  ]
+                }
+              },
+              "required": [
+                "english",
+                "chinese",
+                "japanese",
+                "effective",
+                "ineffective",
+                "no_effect"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pokemon type updated successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
-      "/pokemon_types/{id}": {
-        "get": {
-          "tags": [
-            "pokemon_types"
-          ],
-          "description": "",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK"
-            },
-            "400": {
-              "description": "Bad Request"
-            }
+      "delete": {
+        "tags": [
+          "pokemon_types"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
-        },
-        "put": {
-          "tags": [
-            "pokemon_types"
-          ],
-          "description": "",
-          "parameters": [
-            {
-              "name": "body",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "english": {
-                    "type": "string",
-                    "example": "Fire"
-                  },
-                  "chinese": {
-                    "type": "string",
-                    "example": "火"
-                  },
-                  "japanese": {
-                    "type": "string",
-                    "example": "ファイア"
-                  },
-                  "effective": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": [
-                      "Grass",
-                      "Bug",
-                      "Ice"
-                    ]
-                  },
-                  "ineffective": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": [
-                      "Water",
-                      "Rock"
-                    ]
-                  },
-                  "no_effect": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": [
-                      "None"
-                    ]
-                  }
-                },
-                "required": [
-                  "english",
-                  "chinese",
-                  "japanese",
-                  "effective",
-                  "ineffective",
-                  "no_effect"
-                ]
-              }
-            }
-          ],
-          "responses": {
-            "204": {
-              "description": "No Content"
-            },
-            "400": {
-              "description": "Bad Request"
-            },
-            "412": {
-              "description": "Precondition Failed"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "pokemon_types"
-          ],
-          "description": "",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "204": {
-              "description": "No Content"
-            },
-            "400": {
-              "description": "Bad Request"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
+        ],
+        "responses": {
+          "204": {
+            "description": "Pokemon type deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
