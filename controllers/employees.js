@@ -57,7 +57,7 @@ const createEmployee = async (req, res) => {
 const updateEmployee = async (req, res) => {
     //#swagger.tags=['employees']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid employee id to update one.');
+        return res.status(400).json({ error: 'Must use a valid employee id to update one.' });
     }
     const employeeId = new ObjectId(req.params.id);
     const employee = {
@@ -84,20 +84,23 @@ const updateEmployee = async (req, res) => {
 const deleteEmployee = async (req, res) => {
     //#swagger.tags=['employees']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid employee id to delete one.');
+        return res.status(400).json('Must use a valid employee id to delete one.');
     }
+
     try {
         const employeeId = new ObjectId(req.params.id);
         const response = await mongodb.getDatabase().db().collection('employees').deleteOne({ _id: employeeId });
+
         if (response.deletedCount > 0) {
-            res.status(200).json({ message: 'Employee deleted successfully' });
+            return res.status(200).json({ message: 'Employee deleted successfully' });
         } else {
-            res.status(404).json({ error: 'Employee not found' });
+            return res.status(404).json({ error: 'Employee not found' });
         }
     } catch (error) {
-        res.status(500).json({ error: error.message || 'An error occurred while deleting the employee.' });
+        return res.status(500).json({ error: error.message || 'An error occurred while deleting the employee.' });
     }
 };
+
 
 module.exports = {
     getAll,

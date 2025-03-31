@@ -16,7 +16,7 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
     //#swagger.tags=['pokemon_types']
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid Pokemon Type ID.');
+        return res.status(400).json({ error: 'Must use a valid Pokemon Type ID.' });
     }
     try {
         const pokemonId = new ObjectId(req.params.id);

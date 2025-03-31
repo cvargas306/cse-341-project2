@@ -1,6 +1,8 @@
 const validator = require('../helpers/validate');
 
 const saveEmployee = (req, res, next) => {
+    console.log("Received body:", req.body);
+
     const isUpdate = req.method === 'PUT';
 
     const validationRule = {

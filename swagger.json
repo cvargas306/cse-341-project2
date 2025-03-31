@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Project 2 Api",
-    "description": "Project 2 Api",
+    "title": "Project 2 API",
+    "description": "Project 2 API",
     "version": "1.0.0"
   },
-  "host": "cse-341-project2-x7gq.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -20,6 +20,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
@@ -36,6 +46,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -48,54 +61,37 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string",
                   "example": "any"
                 },
                 "age": {
-                  "type": "integer",
                   "example": "any"
                 },
                 "gender": {
-                  "type": "string",
                   "example": "any"
                 },
                 "designation": {
-                  "type": "string",
                   "example": "any"
                 },
                 "department": {
-                  "type": "string",
                   "example": "any"
                 },
                 "salary": {
-                  "type": "integer",
                   "example": "any"
                 },
                 "seniority": {
-                  "type": "string",
                   "example": "any"
                 }
-              },
-              "required": [
-                "name",
-                "age",
-                "gender",
-                "designation",
-                "department",
-                "salary",
-                "seniority"
-              ]
+              }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "412": {
             "description": "Precondition Failed"
@@ -129,6 +125,12 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -147,36 +149,28 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string",
                   "example": "any"
                 },
                 "age": {
-                  "type": "integer",
                   "example": "any"
                 },
                 "gender": {
-                  "type": "string",
                   "example": "any"
                 },
                 "designation": {
-                  "type": "string",
                   "example": "any"
                 },
                 "department": {
-                  "type": "string",
                   "example": "any"
                 },
                 "salary": {
-                  "type": "integer",
                   "example": "any"
                 },
                 "seniority": {
-                  "type": "string",
                   "example": "any"
                 }
               }
@@ -184,11 +178,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "412": {
             "description": "Precondition Failed"
@@ -212,11 +209,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -230,9 +230,15 @@
           "pokemon_types"
         ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -245,70 +251,37 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "english": {
-                  "type": "string",
-                  "example": "Fire"
+                  "example": "any"
                 },
                 "chinese": {
-                  "type": "string",
-                  "example": "火"
+                  "example": "any"
                 },
                 "japanese": {
-                  "type": "string",
-                  "example": "ファイア"
+                  "example": "any"
                 },
                 "effective": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "Grass",
-                    "Bug",
-                    "Ice"
-                  ]
+                  "example": "any"
                 },
                 "ineffective": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "Water",
-                    "Rock"
-                  ]
+                  "example": "any"
                 },
                 "no_effect": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "None"
-                  ]
+                  "example": "any"
                 }
-              },
-              "required": [
-                "english",
-                "chinese",
-                "japanese",
-                "effective",
-                "ineffective",
-                "no_effect"
-              ]
+              }
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Pokemon type created successfully"
+            "description": "Created"
           },
-          "400": {
-            "description": "Bad Request"
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -322,6 +295,9 @@
           "pokemon_types"
         ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -339,6 +315,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -357,73 +336,43 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "english": {
-                  "type": "string",
-                  "example": "Fire"
+                  "example": "any"
                 },
                 "chinese": {
-                  "type": "string",
-                  "example": "火"
+                  "example": "any"
                 },
                 "japanese": {
-                  "type": "string",
-                  "example": "ファイア"
+                  "example": "any"
                 },
                 "effective": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "Grass",
-                    "Bug",
-                    "Ice"
-                  ]
+                  "example": "any"
                 },
                 "ineffective": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "Water",
-                    "Rock"
-                  ]
+                  "example": "any"
                 },
                 "no_effect": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "example": [
-                    "None"
-                  ]
+                  "example": "any"
                 }
-              },
-              "required": [
-                "english",
-                "chinese",
-                "japanese",
-                "effective",
-                "ineffective",
-                "no_effect"
-              ]
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Pokemon type updated successfully"
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -444,8 +393,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Pokemon type deleted successfully"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
