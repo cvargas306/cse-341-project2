@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Employees Api",
-    "description": "Employees Api",
+    "title": "Project 2 Api",
+    "description": "Project 2 Api",
     "version": "1.0.0"
   },
   "host": "cse-341-project2-x7gq.onrender.com",
@@ -220,6 +220,232 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pokemon_types/": {
+      "get": {
+        "tags": [
+          "pokemon_types"
+        ],
+        "description": "Get all Pokemon types",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "pokemon_types"
+        ],
+        "description": "Create a new Pokemon type",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "english": {
+                  "type": "string",
+                  "example": "Fire"
+                },
+                "chinese": {
+                  "type": "string",
+                  "example": "火"
+                },
+                "japanese": {
+                  "type": "string",
+                  "example": "ファイア"
+                },
+                "effective": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "Grass",
+                    "Bug",
+                    "Ice"
+                  ]
+                },
+                "ineffective": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "Water",
+                    "Rock"
+                  ]
+                },
+                "no_effect": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "None"
+                  ]
+                }
+              },
+              "required": [
+                "english",
+                "chinese",
+                "japanese",
+                "effective",
+                "ineffective",
+                "no_effect"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "/pokemon_types/{id}": {
+        "get": {
+          "tags": [
+            "pokemon_types"
+          ],
+          "description": "",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "pokemon_types"
+          ],
+          "description": "",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "english": {
+                    "type": "string",
+                    "example": "Fire"
+                  },
+                  "chinese": {
+                    "type": "string",
+                    "example": "火"
+                  },
+                  "japanese": {
+                    "type": "string",
+                    "example": "ファイア"
+                  },
+                  "effective": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "Grass",
+                      "Bug",
+                      "Ice"
+                    ]
+                  },
+                  "ineffective": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "Water",
+                      "Rock"
+                    ]
+                  },
+                  "no_effect": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "None"
+                    ]
+                  }
+                },
+                "required": [
+                  "english",
+                  "chinese",
+                  "japanese",
+                  "effective",
+                  "ineffective",
+                  "no_effect"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "412": {
+              "description": "Precondition Failed"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "pokemon_types"
+          ],
+          "description": "",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
           }
         }
       }
