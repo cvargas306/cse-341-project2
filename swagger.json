@@ -14,22 +14,12 @@
     "/": {
       "get": {
         "tags": [
-          "Hello, World!"
+          "Hello, Project 2!"
         ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
