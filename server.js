@@ -7,15 +7,24 @@ const passport = require('passport');
 const session = require('express-session');
 const GitHubStrategy = require('passport-github2').Strategy;
 require('dotenv').config();
+const MongoStore = require('connect-mongo');
 
 
 const port = process.env.PORT || 3000;
 
 app
     .use(session({
-        secret: "secret",
+        secret: process.env.SESSION_SECRET || "secret",
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGODB_URL, // make sure it's in your .env on Render
+            collectionName: 'sessions'
+        }),
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, // 1 day
+            httpOnly: true
+        }
     }))
     .use(passport.initialize())
     .use(passport.session())
@@ -30,7 +39,7 @@ app
             'GET, POST, PUT, DELETE, OPTIONS');
         next();
     });
-app.use(cors);
+app.use(cors());
 
 app.use(express.json());
 
@@ -58,6 +67,7 @@ app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged i
 
 app.get('/github/callback', passport.authenticate('github', {
     failureRedirect: '/api-docs',
+    session: true
 }),
     (req, res) => {
         req.session.user = req.user;
