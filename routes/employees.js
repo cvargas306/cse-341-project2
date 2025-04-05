@@ -3,7 +3,7 @@ const router = express.Router();
 
 const employeesController = require('../controllers/employees');
 const validation = require('../middleware/validate');
-const { isAuthenticated } = require("/middleware/authenticate");
+const { isAuthenticated } = require("../middleware/authenticate");
 
 router.get('/', employeesController.getAll);
 

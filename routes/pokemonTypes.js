@@ -3,7 +3,7 @@ const router = express.Router();
 
 const pokemonTypesController = require('../controllers/pokemonTypes');
 const validation = require('../middleware/validate');
-const { isAuthenticated } = require("/middleware/authenticate");
+const { isAuthenticated } = require("../middleware/authenticate");
 
 router.get('/', pokemonTypesController.getAll);
 
